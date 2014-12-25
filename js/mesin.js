@@ -50,8 +50,8 @@ $(document).ready(function() {
 		$('#seri').val('');
 		$('#tahun').val('');
 		$('#seksi').val('');
-		$('#univ').html('<i class="fa fa-edit"></i> Add New');
-		$('#dialog-title').html('<i class="fa fa-edit fa-2x"></i> Add New Dialog');
+		$('#univ').html('<i class="fa fa-plus"></i> Add New');
+		$('#dialog-title').html('<i class="fa fa-plus fa-2x"></i> Add New Dialog');
 		$('#assetno').removeAttr('disabled');
 		$('#myModal').modal('show');
 	});
