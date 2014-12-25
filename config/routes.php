@@ -1,6 +1,6 @@
 <?php
 return array(
-    'default' => '/pages/mesin',
+    'default' => '/pages/dashboard',
     'errors' => '/error/:code',
     'routes' => array(
 		'/pages(/:action(/:id))' => array(

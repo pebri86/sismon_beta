@@ -14,6 +14,21 @@ class Pages extends \Lib\Controller {
 
 		$this -> render("../views/index/mesin.phtml",array('data' => 'data','message' => 0));
 	}
+	
+	public function userAction($msg) {
+
+		$this -> render("../views/index/user.phtml",array('data' => 'data','message' => 0));
+	}
+	
+	public function loginAction($msg) {
+
+		$this -> render("../views/index/login.phtml",array('data' => 'data','message' => 0));
+	}
+	
+	public function dashboardAction($msg) {
+
+		$this -> render("../views/index/dashboard.phtml",array('data' => 'data','message' => 0));
+	}
 
 }
 ?>

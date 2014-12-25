@@ -69,11 +69,10 @@ class Mesin {
 					seksi = :seksi, 
 					enable = :enable
 	            WHERE
-	                id = :id"
+	                assetno = :assetno"
 	    );
 	
 	    $data = array(
-	        ':id' => $data['id'],
 	        ':assetno' => $data['assetno'], 
 			':description' => $data['description'],
 			':merk' => $data['merk'], 
@@ -93,7 +92,7 @@ class Mesin {
 			$query = \Library\Db::getInstance()->prepare(
 				"DELETE FROM mesin
 					WHERE
-				id = :id"
+				assetno = :id"
 			);
 
 			$data = array(

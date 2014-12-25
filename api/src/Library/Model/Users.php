@@ -33,12 +33,12 @@ class Users {
 		    return $query->execute($data);
 		}
 	
-	public function getMesin($id)
+	public function getUser($id)
 	{
-	    $sql = "SELECT * FROM mesin WHERE assetno = :assetno LIMIT 1";
+	    $sql = "SELECT * FROM login WHERE username = :username LIMIT 1";
 	    $query = \Library\Db::getInstance()->prepare($sql);
 	
-	    $values = array(':assetno' => $id);
+	    $values = array(':username' => $id);
 	    $query->execute($values);
 	
 	    return $query->fetch(\PDO::FETCH_ASSOC);
@@ -47,41 +47,31 @@ class Users {
 	public function update($data)
 	{
 	    $query = \Library\Db::getInstance()->prepare(
-	        "UPDATE mesin 
+	        "UPDATE login
 	            SET 
-	                assetno = :assetno, 
-					description = :description,
-					merk = :merk, 
-					seri = :seri, 
-					tahun = :tahun, 
-					seksi = :seksi, 
-					enable = :enable
+	                password = :password, 
+					akses = :akses
 	            WHERE
-	                id = :id"
+	                username = :username"
 	    );
 	
 	    $data = array(
-	        ':id' => $data['id'],
-	        ':assetno' => $data['assetno'], 
-			':description' => $data['description'],
-			':merk' => $data['merk'], 
-			':seri' => $data['seri'], 
-			':tahun' => $data['tahun'], 
-			':seksi' => $data['seksi'], 
-			':enable' => $data['enable']
+	        ':username' => $data['username'],
+	        ':password' => $data['password'], 
+			':akses' => $data['akses']
 	    );
 	
 	    return $query->execute($data);
 	}
 	
 	public function delete($id) {
-		$result = $this->getMesin($id);
+		$result = $this->getUser($id);
 		if($result != NULL){
 		   
 			$query = \Library\Db::getInstance()->prepare(
-				"DELETE FROM mesin
+				"DELETE FROM login
 					WHERE
-				id = :id"
+				  username = :id"
 			);
 
 			$data = array(
