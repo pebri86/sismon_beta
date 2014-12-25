@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$("#login").click(function() {
+		var st_process = '<div class="alert alert-success" role="alert"> Logging in...</div>';
 		var st_success = '<div class="alert alert-success" role="alert"><strong>Bravo!</strong> Login success.</div>';
 		var st_error = '<div class="alert alert-danger" role="alert"><strong>Alert!</strong> Login failed, wrong username or password.</div>';
 		var user = $("#login-username").val();
@@ -26,7 +27,7 @@ $(document).ready(function() {
 				},
 				data : login,
 				beforeSend : function() {
-					$("#message").html("Logging in...");
+					$("#message").html(st_process);
 				}
 			});
 			return false;

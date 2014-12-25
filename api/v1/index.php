@@ -199,7 +199,7 @@ $app -> post('/mesin', 'authenticate', function() use ($app) {
  */
 $app -> put('/mesin/:id', 'authenticate', function($id) use ($app) {
 	// check for required params
-	verifyRequiredParams(array('assetno', 'description', 'merk', 'seri', 'tahun', 'seksi', 'enable'));
+	verifyRequiredParams(array('description', 'merk', 'seri', 'tahun', 'seksi', 'enable'));
 
 	$response = array();
 	$data = new \Library\Model\Mesin();
@@ -233,7 +233,7 @@ $app -> put('/mesin/:id', 'authenticate', function($id) use ($app) {
 $app -> delete('/mesin/:id', 'authenticate', function($id) use ($app) {
 	$data = new \Library\Model\Mesin();
 	$response = array();
-	$result = $data -> delete(id);
+	$result = $data -> delete($id);
 	if ($result) {
 		$response["error"] = false;
 		$response["message"] = "Task deleted succesfully";
