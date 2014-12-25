@@ -100,6 +100,30 @@ $app -> post('/login', function() use ($app) {
 });
 
 /**
+ * Add new users
+ * method POST
+ * url /users
+ */
+$app -> post('/users', 'authenticate', function() {
+	// check for required params
+	verifyRequiredParams(array('username', 'password', 'akses'));
+
+	$response = array();
+	$login = new \Library\Login();
+	$result = $login -> register($_POST);
+
+	if ($result) {
+		$response["error"] = false;
+		$response["message"] = "User created successfully";
+		echoRespnse(201, $response);
+	} else {
+		$response["error"] = true;
+		$response["message"] = "Failed to create new user. Please try again";
+		echoRespnse(200, $response);
+	}
+});
+
+/**
  * Listing all users
  * method GET
  * url /users
