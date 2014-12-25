@@ -31,8 +31,8 @@ $(document).ready(function() {
 		var rowData = table.row(this).data();
 		$('#mode').val('1');
 		$('#assetno').attr('disabled', 'true');
-		$('#univ').html('Save Changes');
-		$('#dialog-title').html('Edit Dialog');
+		$('#univ').html('<i class="fa fa-edit"></i> Save Changes');
+		$('#dialog-title').html('<i class="fa fa-edit fa-2x"></i> Edit Dialog');
 		$('#assetno').val(rowData.assetno);
 		$('#description').val(rowData.description);
 		$('#merk').val(rowData.merk);
@@ -50,8 +50,8 @@ $(document).ready(function() {
 		$('#seri').val('');
 		$('#tahun').val('');
 		$('#seksi').val('');
-		$('#univ').html('Add New');
-		$('#dialog-title').html('Add New Dialog');
+		$('#univ').html('<i class="fa fa-edit"></i> Add New');
+		$('#dialog-title').html('<i class="fa fa-edit fa-2x"></i> Add New Dialog');
 		$('#assetno').removeAttr('disabled');
 		$('#myModal').modal('show');
 	});
