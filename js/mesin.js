@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	var api_key = "5457c9b0db98a09651aa5e92192aaa33";
+	var app_id = "web001";
 	var table = $('#mesin-table').DataTable({
 		"processing" : true,
 		"serverSide" : false,
@@ -6,8 +8,8 @@ $(document).ready(function() {
 			"url" : "/sismon_beta/api/v1/mesin",
 			"type" : "GET",
 			"beforeSend" : function(xhr) {
-				xhr.setRequestHeader("Authorization", "5457c9b0db98a09651aa5e92192aaa33");
-				xhr.setRequestHeader("Authorization-id", "web001");
+				xhr.setRequestHeader("Authorization", api_key);
+				xhr.setRequestHeader("Authorization-id", app_id);
 			}
 		},
 		"columns" : [{
@@ -25,6 +27,15 @@ $(document).ready(function() {
 		}, {
 			"data" : "enable"
 		}]
+	});
+	
+	$('body').on("click", '#mesin-table tbody tr', function() {
+		if ($(this).hasClass('active'))
+			$(this).removeClass('active');
+		else {
+			$(this).siblings('.active').removeClass('active');
+			$(this).addClass('active');
+		}
 	});
 
 	$('#mesin-table tbody').on('click', 'tr', function() {
@@ -79,8 +90,8 @@ $(document).ready(function() {
 					}
 				},
 				beforeSend : function(xhr) {
-					xhr.setRequestHeader("Authorization", "5457c9b0db98a09651aa5e92192aaa33");
-					xhr.setRequestHeader("Authorization-id", "web001");
+					xhr.setRequestHeader("Authorization", api_key);
+					xhr.setRequestHeader("Authorization-id", app_id);
 					$("#message").html(st_process);
 				}
 			});
@@ -111,8 +122,8 @@ $(document).ready(function() {
 					}
 				},
 				beforeSend : function(xhr) {
-					xhr.setRequestHeader("Authorization", "5457c9b0db98a09651aa5e92192aaa33");
-					xhr.setRequestHeader("Authorization-id", "web001");
+					xhr.setRequestHeader("Authorization", api_key);
+					xhr.setRequestHeader("Authorization-id", app_id);
 					$("#message").html(st_process);
 				}
 			});
@@ -137,8 +148,8 @@ $(document).ready(function() {
 					}
 				},
 				beforeSend : function(xhr) {
-					xhr.setRequestHeader("Authorization", "5457c9b0db98a09651aa5e92192aaa33");
-					xhr.setRequestHeader("Authorization-id", "web001");
+					xhr.setRequestHeader("Authorization", api_key);
+					xhr.setRequestHeader("Authorization-id", app_id);
 					$("#message").html(st_process);
 				}
 			});

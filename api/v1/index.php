@@ -55,6 +55,74 @@ function authenticate(\Slim\Route $route) {
 }
 
 /**
+ * Deleting user.
+ * method DELETE
+ * url /users/:id
+ */
+$app -> delete('/users/:id', 'authenticate', function($id) use ($app) {
+	$data = new \Library\Model\Users();
+	$response = array();
+	$result = $data -> delete($id);
+	if ($result) {
+		$response["error"] = false;
+		$response["message"] = "User deleted succesfully";
+	} else {
+		$response["error"] = true;
+		$response["message"] = "User failed to delete. Please try again!";
+	}
+	echoRespnse(200, $response);
+});
+
+/**
+ * change password of user
+ * method PUT
+ * url /users
+ */
+$app -> put('/access/:id', 'authenticate', function($id) use($app){
+	// check for required params
+	verifyRequiredParams(array('akses'));
+
+	$response = array();
+	$login = new \Library\Login();
+
+	$akses = $app -> request -> put('akses');
+
+	if ($login->changeAkses($id, $akses)) {
+		$response["error"] = false;
+		$response["message"] = "User access changed successfully";
+	} else {
+		$response["error"] = true;
+		$response["message"] = "Task failed to update. Please try again!";
+	}
+	echoRespnse(200, $response);
+});
+
+/**
+ * change password of user
+ * method PUT
+ * url /users
+ */
+$app -> put('/users/:id', 'authenticate', function($id) use($app){
+	// check for required params
+	verifyRequiredParams(array('opassword', 'password'));
+
+	$response = array();
+	$login = new \Library\Login();
+
+	$opassword = $app -> request -> put('opassword');
+	$password = $app -> request -> put('password');	
+
+	if ($login->changePassword($id, $opassword, $password)) {
+		$response["error"] = false;
+		$response["message"] = "Password changed successfully";
+	} else {
+		$response["error"] = true;
+		$response["message"] = "Task failed to update. Please try again!";
+	}
+	echoRespnse(200, $response);
+});
+
+/**
  * Login to app
  * method POST
  * url /login

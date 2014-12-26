@@ -5,10 +5,6 @@ $(document).ready(function() {
 		var st_error = '<div class="alert alert-danger" role="alert"><strong>Alert!</strong> Login failed, wrong username or password.</div>';
 		var user = $("#login-username").val();
 		var pass = $("#login-password").val();
-		var login = {
-			username : user,
-			password : pass
-		};
 		if ((user != '') && (pass != '')) {
 			$.ajax({
 				type : "POST",
@@ -25,7 +21,7 @@ $(document).ready(function() {
 						$("#message").html(st_error);
 					}
 				},
-				data : login,
+				data : $('#loginform').serialize(),
 				beforeSend : function() {
 					$("#message").html(st_process);
 				}

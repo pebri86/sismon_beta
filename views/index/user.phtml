@@ -23,19 +23,25 @@
 							<input class="form-control" id="username" name="username" type="text" placeholder="username" disabled>
 						</div>
 					</div>
-					<div class="form-group form-group-sm">
+					<div id="oldpass" class="form-group form-group-sm" style="display: none;">
+						<label class="col-sm-2 control-label" for="opassword">Password</label>
+						<div class="col-sm-10">
+							<input class="form-control" id="opassword" name="opassword" type="password" placeholder="old password" >
+						</div>
+					</div>
+					<div id="pass" class="form-group form-group-sm" style="">
 						<label class="col-sm-2 control-label" for="password">Password</label>
 						<div class="col-sm-10">
 							<input class="form-control" id="password" name="password" type="password" placeholder="password" >
 						</div>
 					</div>
-					<div class="form-group form-group-sm">
+					<div id="cpass" class="form-group form-group-sm" style="">
 						<label class="col-sm-2 control-label" for="cpassword">Confirm</label>
 						<div class="col-sm-10">
 							<input class="form-control" id="cpassword" name="cpassword" type="password" placeholder="confirm password" >
 						</div>
 					</div>
-					<div class="form-group form-group-sm">
+					<div id="access" class="form-group form-group-sm" style="">
 						<label class="col-sm-2 control-label" for="akses">Akses</label>
 						<div class="col-sm-10">
 							<select class="form-control" id="akses" name="akses">
@@ -64,11 +70,46 @@
 		</div>
 	</div>
 </div>
+<div id="confirm" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 id="dialog-title" class="modal-title"><i class="fa fa-question-circle fa-2x"></i> Confirmation</h4>
+			</div>
+			<div class="modal-body">
+				<span id="confirm-message"></span>
+				<div>
+					<p class="text-danger">Are you sure want to delete this user ?</p>
+				</div>				
+				<div>
+					&nbsp;
+					<p class="text-warning">
+						<small>This cannot be undone.</small>
+					</p>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					<i class="fa  fa-close"></i>
+					Close
+				</button>
+				<button type="button" id="confirm-btn" class="btn btn-primary">
+					<i class="fa  fa-trash"></i>
+					Delete
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
 <div id="thanks">
 	<p>
 		<a id="addButton" class="btn btn-primary btn-large"><i class="fa  fa-plus-circle"></i> Add</a>
 		<a id="passButton" class="btn btn-primary btn-large"><i class="fa  fa-edit"></i> Change password</a>
 		<a id="accessButton" class="btn btn-primary btn-large"><i class="fa  fa-key"></i> Change akses</a>
+		<a id="deleteButton" class="btn btn-primary btn-large"><i class="fa  fa-trash"></i> Delete</a>
 	</p>
 </div>
 <div class="row">
