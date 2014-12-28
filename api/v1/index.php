@@ -55,6 +55,125 @@ function authenticate(\Slim\Route $route) {
 }
 
 /**
+ * Listing all faults
+ * method GET
+ * url /faults
+ */
+$app -> get('/faults', 'authenticate', function() {
+	$response = array();
+	$data = new \Library\Model\Faults();
+	$faults = $data -> getAll();
+
+	$response["error"] = false;
+	$response["data"] = $faults;
+
+	echoRespnse(200, $response);
+});
+
+/**
+ * Listing single asset
+ * method GET
+ * url /faults/:id
+ * Will return 404 if the asset doesn't exist
+ */
+$app -> get('/faults/:id', 'authenticate', function($id) {
+	$response = array();
+	$data = new \Library\Model\Faults();
+	$fault = $data -> getMesin($id);
+
+	if ($mesin != NULL) {
+		$response["error"] = false;
+		$response["data"] = $fault;
+		echoRespnse(200, $response);
+	} else {
+		$response["error"] = true;
+		$response["message"] = "The requested resource doesn't exists";
+		echoRespnse(404, $response);
+	}
+});
+
+/**
+ * Creating new fault in db
+ * method POST
+ * params - 'assetno',
+ * 'errorcode',
+ * 'errordesc',
+ * url - /faults
+ */
+$app -> post('/faults', 'authenticate', function() use ($app) {
+	// check for required params
+	verifyRequiredParams(array('assetno', 'errorcode', 'errordesc'));
+
+	$response = array();
+	$data = new \Library\Model\Faults();
+
+	$result = $data -> add($_POST);
+
+	if ($result) {
+		$response["error"] = false;
+		$response["message"] = "Task created successfully";
+		echoRespnse(201, $response);
+	} else {
+		$response["error"] = true;
+		$response["message"] = "Failed to create task. Please try again";
+		echoRespnse(200, $response);
+	}
+});
+
+/**
+ * Updating existing fault
+ * method PUT
+ * params 	'assetno',
+ * 'errorcode',
+ * 'errordesc'
+ * url - /faults/:id
+ */
+$app -> put('/faults/:id', 'authenticate', function($id) use ($app) {
+	// check for required params
+	verifyRequiredParams(array('assetno', 'errorcode', 'errordesc'));
+
+	$response = array();
+	$data = new \Library\Model\Faults();
+
+	$assetno = $app -> request -> put('assetno');
+	$errorcode = $app -> request -> put('errorcode');
+	$errordesc = $app -> request -> put('errordesc');
+	
+	$put_data = array('id' => $id, 'assetno' => $assetno, 'errorcode' => $errorcode, 'errordesc' => $errordesc);
+
+	$result = $data -> update($put_data);
+
+	if ($result) {
+		$response["error"] = false;
+		$response["message"] = "Task updated successfully";
+	} else {
+		$response["error"] = true;
+		$response["message"] = "Task failed to update. Please try again!";
+	}
+	echoRespnse(200, $response);
+});
+
+/**
+ * Deleting fault.
+ * method DELETE
+ * url /faults/:id
+ */
+$app -> delete('/faults/:id', 'authenticate', function($id) use ($app) {
+	$data = new \Library\Model\Faults();
+	$response = array();
+	$result = $data -> delete($id);
+	if ($result) {
+		$response["error"] = false;
+		$response["message"] = "Fault deleted succesfully";
+	} else {
+		$response["error"] = true;
+		$response["message"] = "Fault failed to delete. Please try again!";
+	}
+	echoRespnse(200, $response);
+});
+
+
+/**
  * Deleting user.
  * method DELETE
  * url /users/:id

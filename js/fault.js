@@ -1,11 +1,11 @@
 $(document).ready(function() {
 	var api_key = "5457c9b0db98a09651aa5e92192aaa33";
 	var app_id = "web001";
-	var table = $('#mesin-table').DataTable({
+	var table = $('#fault-table').DataTable({
 		"processing" : true,
 		"serverSide" : false,
 		"ajax" : {
-			"url" : "/sismon_beta/api/v1/mesin",
+			"url" : "/sismon_beta/api/v1/faults",
 			"type" : "GET",
 			"beforeSend" : function(xhr) {
 				xhr.setRequestHeader("Authorization", api_key);
@@ -13,23 +13,17 @@ $(document).ready(function() {
 			}
 		},
 		"columns" : [{
+			"data" : "id"
+		}, {
 			"data" : "assetno"
 		}, {
-			"data" : "description"
+			"data" : "errorcode"
 		}, {
-			"data" : "merk"
-		}, {
-			"data" : "seri"
-		}, {
-			"data" : "tahun"
-		}, {
-			"data" : "seksi"
-		}, {
-			"data" : "enable"
+			"data" : "errordesc"
 		}]
 	});
 	
-	$('body').on("click", '#mesin-table tbody tr', function() {
+	$('body').on("click", '#fault-table tbody tr', function() {
 		if ($(this).hasClass('active'))
 			$(this).removeClass('active');
 		else {
@@ -38,18 +32,15 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#mesin-table tbody').on('click', 'tr', function() {
+	$('#fault-table tbody').on('click', 'tr', function() {
 		var rowData = table.row(this).data();
 		$('#mode').val('1');
-		$('#assetno').attr('disabled', 'true');
+		$('#id').val(rowData.id);
 		$('#univ').html('<i class="fa fa-edit"></i> Save Changes');
 		$('#dialog-title').html('<i class="fa fa-edit fa-2x"></i> Edit Dialog');
 		$('#assetno').val(rowData.assetno);
-		$('#description').val(rowData.description);
-		$('#merk').val(rowData.merk);
-		$('#seri').val(rowData.seri);
-		$('#tahun').val(rowData.tahun);
-		$('#seksi').val(rowData.seksi);
+		$('#errorcode').val(rowData.errorcode);
+		$('#errordesc').val(rowData.errordesc);
 		$('#myModal').modal('show');
 	});
 
@@ -58,17 +49,16 @@ $(document).ready(function() {
 		$('#dialog-form').trigger("reset");
 		$('#univ').html('<i class="fa fa-plus"></i> Add New');
 		$('#dialog-title').html('<i class="fa fa-plus fa-2x"></i> Add New Dialog');
-		$('#assetno').removeAttr('disabled');
 		$('#myModal').modal('show');
 	});
 	
 	$('#delete').click(function(){
-		var assetno = $('#assetno').val();
+		var id = $('#id').val();
 		var st_process = '<div class="alert alert-success" role="alert"> Processing...</div>';
 		var st_success = '<div class="alert alert-success" role="alert"><strong>Bravo!</strong> operation success.</div>';
 		var st_error = '<div class="alert alert-danger" role="alert"><strong>Alert!</strong> An error occured.</div>';
 		$.ajax({
-				url : "/sismon_beta/api/v1/mesin/"+assetno,
+				url : "/sismon_beta/api/v1/faults/"+id,
 				type : "DELETE",
 				dataType : "json",
 				success : function(data) {
@@ -99,7 +89,7 @@ $(document).ready(function() {
 		var st_error = '<div class="alert alert-danger" role="alert"><strong>Alert!</strong> An error occured.</div>';
 		if (mode == 0) {// add mode
 			$.ajax({
-				url : "/sismon_beta/api/v1/mesin",
+				url : "/sismon_beta/api/v1/faults",
 				type : "POST",
 				data : $('#dialog-form').serialize(),
 				dataType : "json",
@@ -123,9 +113,9 @@ $(document).ready(function() {
 				}
 			});
 		} else {// update mode
-			var assetno = $('#assetno').val();
+			var id = $('#id').val();
 			$.ajax({
-				url : "/sismon_beta/api/v1/mesin/"+assetno,
+				url : "/sismon_beta/api/v1/faults/"+id,
 				type : "PUT",
 				data : $('#dialog-form').serialize(),
 				dataType : "json",

@@ -9,6 +9,11 @@ class Pages extends \Lib\Controller {
 	public function Topics() {
 		__construct();
 	}
+	
+	public function faultAction($msg) {
+
+		$this -> render("../views/index/fault.phtml",array('data' => 'data','message' => 0));
+	}
 
 	public function mesinAction($msg) {
 
