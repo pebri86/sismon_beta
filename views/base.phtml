@@ -60,12 +60,13 @@ $config = \Lib\Config::get('site');
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                     	<?php if(isset($_SESSION['username'])) { ?>
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Welcome, <?php echo $_SESSION['username'];?></a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Welcome, <?php echo $_SESSION['username']; ?></a>
                         </li>
                         <li class="divider"></li>                        
                         <li><a href="#" id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         <?php }
-							else{ ?>
+							else{
+ ?>
 								<li><a href="/sismon_beta/pages/login"><i class="fa fa-sign-out fa-fw"></i> Login</a>
 						<?php } ?>						
                         </li>
@@ -80,17 +81,20 @@ $config = \Lib\Config::get('site');
                             <a href="/sismon_beta/pages/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard<span class="fa arrow"></span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Cetak Rata<span class="fa arrow"></span></a>                          
+                            <a href="/sismon_beta/section/cera"><i class="fa fa-bar-chart-o fa-fw"></i> Cetak Rata<span class="fa arrow"></span></a>                          
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Cetak Dalam<span class="fa arrow"></span></a>
+                            <a href="/sismon_beta/section/celam"><i class="fa fa-table fa-fw"></i> Cetak Dalam<span class="fa arrow"></span></a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Cetak Nomor<span class="fa arrow"></span></a>
+                            <a href="/sismon_beta/section/cemor"><i class="fa fa-edit fa-fw"></i> Cetak Nomor<span class="fa arrow"></span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Penyelesaian Masinal<span class="fa arrow"></span></a>                            
+                            <a href="/sismon_beta/section/masinal"><i class="fa fa-wrench fa-fw"></i> Penyelesaian Masinal<span class="fa arrow"></span></a>                            
                         </li>
+                        <?php if (isset($_SESSION['akses'])){
+							if($_SESSION['akses'] == 'admin'){
+						?>
                         <li>
                             <a href="/sismon_beta/pages/user"><i class="fa fa-sitemap fa-fw"></i> User Management<span class="fa arrow"></span></a>
                         </li>  
@@ -99,7 +103,11 @@ $config = \Lib\Config::get('site');
                         </li> 
                         <li>
                             <a href="/sismon_beta/pages/fault"><i class="fa fa-sitemap fa-fw"></i> Fault List<span class="fa arrow"></span></a>
-                        </li>                        
+                        </li>        
+                        <?php
+							}
+						}
+						?>                
                     </ul>
                 </div>
             </div>

@@ -55,6 +55,28 @@ function authenticate(\Slim\Route $route) {
 }
 
 /**
+ * Listing single asset
+ * method GET
+ * url /thumbnails/:id
+ * Will return 404 if the asset doesn't exist
+ */
+$app -> get('/thumbnails/:id', 'authenticate', function($id) {
+	$response = array();
+	$data = new \Library\Model\View\Status();
+	$status = $data -> getThumbnailStatus($id);
+
+	if ($status != NULL) {
+		$response["error"] = false;
+		$response["data"] = $status;
+		echoRespnse(200, $response);
+	} else {
+		$response["error"] = true;
+		$response["message"] = "The requested resource doesn't exists";
+		echoRespnse(404, $response);
+	}
+});
+
+/**
  * Listing all faults
  * method GET
  * url /faults

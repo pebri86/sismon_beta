@@ -4,7 +4,7 @@ namespace Library\Model;
 class Mesin {    		
 	public function getAll()
 	{
-	    $sql = "SELECT * FROM MESIN";	
+	    $sql = "SELECT * FROM mesin";	
 	    $query = \Library\Db::getInstance()->prepare($sql);
 	    $query->execute();
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
