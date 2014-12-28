@@ -27,6 +27,8 @@ $(document).ready(function() {
 				}
 			});
 			return false;
+		}else{
+			$("#message").html('<div class="alert alert-danger" role="alert"><strong>Alert!</strong> Username and password shouldn\'t be empty.</div>');
 		}
 	});
 
