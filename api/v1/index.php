@@ -55,7 +55,7 @@ function authenticate(\Slim\Route $route) {
 }
 
 /**
- * Listing single asset
+ * Listing thumbnail status of section
  * method GET
  * url /thumbnails/:id
  * Will return 404 if the asset doesn't exist
