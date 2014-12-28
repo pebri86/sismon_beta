@@ -20,13 +20,13 @@ $(document).ready(function() {
 						    monitor;
 						if (data.data[x].monitor == 1) {
 							panel = '<div class="panel panel-primary">';
-							monitor = '<p class="text-success"><i class="fa fa-gear"></i> Status Online</p>';
+							monitor = '<p class="text-success"><i class="fa fa-gear"></i> Status <strong>Online</strong></p>';
 						} else {
 							panel = '<div class="panel panel-red">';
-							monitor = '<p class="text-danger"><i class="fa fa-gear"></i> Status Offline</p>';
+							monitor = '<p class="text-danger"><i class="fa fa-gear"></i> Status <strong>Offline</strong></p>';
 						}
 
-						$('#content').append('<div class="col-lg-4 col-md-6">' + panel + '<div class="panel-heading">' + data.data[x].description + '</div>' + '<div class="panel-body">' + '<p><i class="fa fa-gears"></i> Asset No. ' + data.data[x].assetno + '</p>' + '<p><i class="fa fa-tachometer"></i> Speed ' + data.data[x].speed + '</p>' + '<p><i class="fa fa-bar-chart-o"></i> Production ' + data.data[x].tprod + '</p>' + '<p><i class="fa fa-exclamation-circle"></i> Error code < ' + data.data[x].errorcode + ' ></p>' + '<p class="text-danger"><i class="fa fa-tag"></i> Error Desc. ' + data.data[x].errordesc + '</p>' + monitor + '</div>' + '<a href="#">' + '<div class="panel-footer">' + '<span class="pull-left">View Details</span>' + '<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>' + '<div class="clearfix"></div>' + '</div> </a>' + '</div></div>');
+						$('#content').append('<div class="col-lg-4 col-md-6">' + panel + '<div class="panel-heading">' + data.data[x].description + '</div>' + '<div class="panel-body">' + '<p><i class="fa fa-gears"></i> Asset No. <strong>' + data.data[x].assetno + '</strong></p>' + '<p><i class="fa fa-tachometer"></i> Speed <strong>' + data.data[x].speed + '</strong> SPH</p>' + '<p><i class="fa fa-bar-chart-o"></i> Production <strong>' + data.data[x].tprod + '</strong> sheet(s)</span></p>' + '<p><i class="fa fa-exclamation-circle"></i> Error code <strong>< ' + data.data[x].errorcode + ' ></strong></p>' + '<p class="text-danger"><i class="fa fa-tag"></i> Error Desc. <strong>' + data.data[x].errordesc + '</strong></p>' + monitor + '</div>' + '<a href="#">' + '<div class="panel-footer">' + '<span class="pull-left">View Details</span>' + '<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>' + '<div class="clearfix"></div>' + '</div> </a>' + '</div></div>');
 					}
 				} else {
 					$("#content").html("No Data or Error occured!");
