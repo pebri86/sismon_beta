@@ -55,6 +55,7 @@ function authenticate(\Slim\Route $route) {
 }
 
 /**
+<<<<<<< HEAD
  * Listing single speed log
  * method GET
  * url /speedlog/:id/:filter
@@ -79,6 +80,9 @@ $app -> get('/speedlog/:id/:filter', function($id,$filter) {
 
 /**
  * Listing single asset
+=======
+ * Listing thumbnail status of section
+>>>>>>> 563bce7cbf7c378c550fa0f287a71835cd604015
  * method GET
  * url /thumbnails/:id
  * Will return 404 if the asset doesn't exist
