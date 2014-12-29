@@ -9,25 +9,11 @@ class Section extends \Lib\Controller {
 	public function Topics() {
 		__construct();
 	}
-	
-	public function ceraAction($msg) {
 
-		$this -> render("../views/section/cera.phtml",array('data' => 'data','message' => 0));
+	public function detailAction($options) {
+		$id = $options['id'];
+		$this -> render("../views/section/details.phtml", array('title' => 'Detail Status Mesin Asset Nr. '.$id, 'assetno' => $id));
 	}
-	
-	public function celamAction($msg) {
 
-		$this -> render("../views/section/celam.phtml",array('data' => 'data','message' => 0));
-	}
-	
-	public function cemorAction($msg) {
-
-		$this -> render("../views/section/cemor.phtml",array('data' => 'data','message' => 0));
-	}
-	
-	public function masinalAction($msg) {
-
-		$this -> render("../views/section/masinal.phtml",array('data' => 'data','message' => 0));
-	}
 }
 ?>

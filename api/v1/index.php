@@ -55,7 +55,29 @@ function authenticate(\Slim\Route $route) {
 }
 
 /**
-<<<<<<< HEAD
+ * Listing weekly log
+ * method GET
+ * url /weeklylog/:id/:filter
+ * Will return 404 if the asset doesn't exist
+ */
+$app -> get('/weeklylog/:id/:filter', function($id,$filter) {
+	$response = array();
+	$data = new \Library\Model\View\Logs();
+	$result = $data -> getWeeklyProduction($id, $filter);
+
+	if ($result != NULL) {
+		$response["error"] = false;
+		$response["data"] = $result;
+		echoRespnse(200, $response);
+	} else {
+		$response["error"] = true;
+		$response["message"] = "The requested resource doesn't exists";
+		echoRespnse(404, $response);
+	}
+});
+
+
+/**
  * Listing single speed log
  * method GET
  * url /speedlog/:id/:filter
@@ -79,10 +101,7 @@ $app -> get('/speedlog/:id/:filter', function($id,$filter) {
 
 
 /**
- * Listing single asset
-=======
  * Listing thumbnail status of section
->>>>>>> 563bce7cbf7c378c550fa0f287a71835cd604015
  * method GET
  * url /thumbnails/:id
  * Will return 404 if the asset doesn't exist

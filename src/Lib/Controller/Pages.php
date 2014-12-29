@@ -10,6 +10,26 @@ class Pages extends \Lib\Controller {
 		__construct();
 	}
 	
+	public function ceraAction($msg) {
+
+		$this -> render("../views/index/thumbnail.phtml",array('data' => 'data','message' => 'Cetak Rata'));
+	}
+	
+	public function celamAction($msg) {
+
+		$this -> render("../views/index/thumbnail.phtml",array('data' => 'data','message' => 'Cetak Dalam'));
+	}
+	
+	public function cemorAction($msg) {
+
+		$this -> render("../views/index/thumbnail.phtml",array('data' => 'data','message' => 'Cetak Nomor'));
+	}
+	
+	public function masinalAction($msg) {
+
+		$this -> render("../views/index/thumbnail.phtml",array('data' => 'data','message' => 'Saimasinal'));
+	}
+	
 	public function faultAction($msg) {
 
 		$this -> render("../views/index/fault.phtml",array('data' => 'data','message' => 0));
