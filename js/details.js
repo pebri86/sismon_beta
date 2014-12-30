@@ -251,6 +251,8 @@ var table = $('#error-table').dataTable({
 	"columns" : [{
 		"data" : "tglerror"
 	}, {
+		"data" : "tglrelease"
+	}, {
 		"data" : "errorcode"
 	}, {
 		"data" : "errordesc"

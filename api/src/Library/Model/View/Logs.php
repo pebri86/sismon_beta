@@ -54,7 +54,8 @@ class Logs {
 	}
 	
 	public function getErrorLogs($id, $filter) {
-		$_sql = "SELECT logerror.tglerror, 
+		$_sql = "SELECT logerror.tglerror,
+						logerror.tglrelease, 
 						logerror.errorcode, 
 						fault.errordesc,
 						logerror.shift 
