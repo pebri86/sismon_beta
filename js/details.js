@@ -1,13 +1,13 @@
-var api_key = "5457c9b0db98a09651aa5e92192aaa33";
-var app_id = "web001";
-var chart,
-    prodChart;
-var graph,
+var api_key = "5457c9b0db98a09651aa5e92192aaa33",
+    app_id = "web001",
+    chart,
+    prodChart,
+    graph,
     graph1,
     graph2,
-    graph3;
-var id = $('#asset').val();
-var lastweek = $('#lastweek').val();
+    graph3,
+    id = $('#asset').val(),
+    lastweek = $('#lastweek').val();
 
 function getToday() {
 	var today = new Date();
@@ -223,31 +223,51 @@ function updateProductionLog(value) {
 	//Revalidate chart data
 };
 
-(function ($) {
-  $('.spinner .btn:first-of-type').on('click', function() {
-  	var curVal = $('.spinner input').val();
-  	if (curVal < 52){
-  		var newVal = parseInt($('.spinner input').val(), 10) + 1;
-    	$('.spinner input').val(newVal);
-    	updateProductionLog(newVal); 
-    }
-    else
-    	$('.spinner input').val(1);
-  });
-  $('.spinner .btn:last-of-type').on('click', function() {
-    var curVal = $('.spinner input').val();
-  	if (curVal > 1){
-  		var newVal = parseInt($('.spinner input').val(), 10) - 1;
-    	$('.spinner input').val(newVal);
-    	updateProductionLog(newVal); 
-    }
-    else
-    	$('.spinner input').val(52);
-  });
+(function($) {
+	$('.spinner .btn:first-of-type').on('click', function() {
+		var curVal = $('.spinner input').val();
+		if (curVal < 52) {
+			var newVal = parseInt($('.spinner input').val(), 10) + 1;
+			$('.spinner input').val(newVal);
+			updateProductionLog(newVal);
+		} else
+			$('.spinner input').val(1);
+	});
+	$('.spinner .btn:last-of-type').on('click', function() {
+		var curVal = $('.spinner input').val();
+		if (curVal > 1) {
+			var newVal = parseInt($('.spinner input').val(), 10) - 1;
+			$('.spinner input').val(newVal);
+			updateProductionLog(newVal);
+		} else
+			$('.spinner input').val(52);
+	});
 })(jQuery);
 
-$('#datefilter').datepicker({
-    format: "dd-mm-yyyy",
-    autoclose: true,
-    todayHighlight: true
+var table = $('#error-table').dataTable({
+	"processing" : true,
+	"serverSide" : false,
+	"data" : getData('/sismon_beta/api/v1/errorlog/' + id + '/' + getToday()),
+	"columns" : [{
+		"data" : "tglerror"
+	}, {
+		"data" : "errorcode"
+	}, {
+		"data" : "errordesc"
+	}, {
+		"data" : "shift"
+	}]
 });
+
+$('#datefilter').datepicker({
+	format : "dd-mm-yyyy",
+	autoclose : true,
+	todayHighlight : true
+}).on("changeDate", function(e) {
+	updateSpeedLog($("#datefilter").val());
+	table.fnClearTable();
+	var data = getData('/sismon_beta/api/v1/errorlog/' + id + '/' + $("#datefilter").val());
+	table.fnAddData(data);
+	table.fnDraw();
+});
+

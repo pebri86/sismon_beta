@@ -57,6 +57,28 @@ function authenticate(\Slim\Route $route) {
 /**
  * Listing weekly log
  * method GET
+ * url /errorlog/:id/:filter
+ * Will return 404 if the asset doesn't exist
+ */
+$app -> get('/errorlog/:id/:filter', function($id,$filter) {
+	$response = array();
+	$data = new \Library\Model\View\Logs();
+	$result = $data -> getErrorLogs($id, $filter);
+
+	if ($result != NULL) {
+		$response["error"] = false;
+		$response["data"] = $result;
+		echoRespnse(200, $response);
+	} else {
+		$response["error"] = true;
+		$response["message"] = "The requested resource doesn't exists";
+		echoRespnse(404, $response);
+	}
+});
+
+/**
+ * Listing weekly log
+ * method GET
  * url /weeklylog/:id/:filter
  * Will return 404 if the asset doesn't exist
  */

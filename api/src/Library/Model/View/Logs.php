@@ -52,6 +52,27 @@ class Logs {
 		}
 		return $response;
 	}
+	
+	public function getErrorLogs($id, $filter) {
+		$_sql = "SELECT logerror.tglerror, 
+						logerror.errorcode, 
+						fault.errordesc,
+						logerror.shift 
+				 FROM logerror 
+				 INNER JOIN fault 
+				 ON logerror.errorcode = fault.errorcode and logerror.assetno = :assetno
+				 and logerror.tglerror >= :filter1 and logerror.tglerror < :filter2";
+				 
+		$query = \Library\Db::getInstance() -> prepare($_sql);
+		
+		$filter1 = strftime('%Y-%m-%d', strtotime($filter));
+		$filter2 = strftime('%Y-%m-%d', strtotime($filter."+1 day"));
+		$param = array(':assetno' => $id, ':filter1' => $filter1, ':filter2' => $filter2);
+		
+		$query -> execute($param);
+		
+		return $query -> fetchAll(\PDO::FETCH_ASSOC);		
+	}
 
 }
 ?>
