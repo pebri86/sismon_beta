@@ -4,6 +4,7 @@
 	</div>
 </div>
 <input type="hidden" id="asset" value="<?php echo $this->assetno; ?>" />
+<input type="hidden" id="lastweek" value="<?php echo date('W', strtotime("-1 week")); ?>" />
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
@@ -15,7 +16,7 @@
 					<div class="form-group form-group-sm">
 						<label class="col-sm-2 control-label" for="username">Filter</label>
 						<div class="col-sm-10">
-							<input class="form-control" type="date" id="datefilter" value="<?php echo date('Y-m-d'); ?>" onchange="updateSpeedLog(this.value)"/>
+							<input type="text" type="text" class="form-control" id="datefilter" value="<?php echo date('d-m-Y'); ?>" onchange="updateSpeedLog(this.value)"/>
 						</div>
 					</div>
 					
@@ -35,8 +36,7 @@
 					<i class="fa fa-bar-chart fa-2x"></i> Weekly Production Log
 				</div>
 				<div style="float:right; position: relative; top:-30px">
-					<div class="form-group form-group-sm">
-						<label class="col-sm-5 control-label" for="spinner">Filter</label>						
+					<div class="form-group form-group-sm">					
 							<div class="col-sm-7 input-group spinner">
     							<input name="spinText" id="spinText" type="text" class="form-control" value="<?php echo date('W', strtotime("-1 week")); ?>">
     							<div class="input-group-btn-vertical">
@@ -65,4 +65,5 @@
 </div>
 <script src="/sismon_beta/amcharts/amcharts.js" type="text/javascript"></script>
 <script src="/sismon_beta/amcharts/serial.js" type="text/javascript"></script>
+<script src="/sismon_beta/js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script src="/sismon_beta/js/details.js" type="text/javascript"></script>

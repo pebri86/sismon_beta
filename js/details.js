@@ -7,21 +7,7 @@ var graph,
     graph2,
     graph3;
 var id = $('#asset').val();
-
-function getWeekNumber(d) {
-	// Copy date so don't modify original
-	d = new Date(+d);
-	d.setHours(0, 0, 0);
-	// Set to nearest Thursday: current date + 4 - current day number
-	// Make Sunday's day number 7
-	d.setDate(d.getDate() + 4 - (d.getDay() || 7));
-	// Get first day of year
-	var yearStart = new Date(d.getFullYear(), 0, 1);
-	// Calculate full weeks to nearest Thursday
-	var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-	// Return array of year and week number
-	return [weekNo];
-}
+var lastweek = $('#lastweek').val();
 
 function getToday() {
 	var today = new Date();
@@ -64,10 +50,8 @@ function getData(url) {
 AmCharts.ready(function() {
 	// SERIAL CHART
 	var now = getToday();
-	var today = new Date();
-	today.setDate(today.getDate() - 8);
 	var chartData = getData('/sismon_beta/api/v1/speedlog/' + id + '/' + now);
-	var prodData = getData('/sismon_beta/api/v1/weeklylog/' + id + '/' + getWeekNumber(today));
+	var prodData = getData('/sismon_beta/api/v1/weeklylog/' + id + '/' + lastweek);
 	console.debug(chartData);
 	console.debug(prodData);
 	chart = new AmCharts.AmSerialChart();
@@ -261,3 +245,9 @@ function updateProductionLog(value) {
     	$('.spinner input').val(52);
   });
 })(jQuery);
+
+$('#datefilter').datepicker({
+    format: "dd-mm-yyyy",
+    autoclose: true,
+    todayHighlight: true
+});
