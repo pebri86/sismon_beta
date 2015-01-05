@@ -230,8 +230,10 @@ function updateProductionLog(value) {
 			var newVal = parseInt($('.spinner input').val(), 10) + 1;
 			$('.spinner input').val(newVal);
 			updateProductionLog(newVal);
-		} else
+		} else{
 			$('.spinner input').val(1);
+			updateProductionLog(1);
+		}
 	});
 	$('.spinner .btn:last-of-type').on('click', function() {
 		var curVal = $('.spinner input').val();
@@ -239,8 +241,10 @@ function updateProductionLog(value) {
 			var newVal = parseInt($('.spinner input').val(), 10) - 1;
 			$('.spinner input').val(newVal);
 			updateProductionLog(newVal);
-		} else
+		} else{
 			$('.spinner input').val(52);
+			updateProductionLog(52);
+		}
 	});
 })(jQuery);
 
