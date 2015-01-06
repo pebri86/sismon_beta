@@ -13,7 +13,9 @@ class Status {
 		$response = array();
 		foreach ($result as $key) {
 			$sql = "SELECT 
-	    			status.assetno, 
+	    			status.assetno,
+	    			status.mesinrun,
+	    			status.production, 
 	    			status.speed, 
 	    			status.tprod, 
 	    			status.errorcode,
@@ -28,6 +30,8 @@ class Status {
 			$data = $query -> fetch(\PDO::FETCH_ASSOC);
 			$tmp = array();
 			$tmp["assetno"] = $data["assetno"];
+			$tmp["mesinrun"] = $data["mesinrun"];
+			$tmp["production"] = $data["production"];
 			$tmp["speed"] = $data["speed"];
 			$tmp["tprod"] = $data["tprod"];
 			$tmp["errorcode"] = $data["errorcode"];

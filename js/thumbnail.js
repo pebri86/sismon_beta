@@ -17,7 +17,9 @@ $(document).ready(function() {
 					$('#content').html('');
 					for ( x = 0; x < data.data.length; x++) {
 						var panel,
-						    monitor;
+						    monitor,
+						    production,
+						    mesinrun;
 						if (data.data[x].monitor == 1) {
 							if (data.data[x].errorcode == 0)
 								panel = '<div class="panel panel-green">';
@@ -29,14 +31,26 @@ $(document).ready(function() {
 							monitor = '<p class="text-danger"><i class="fa fa-gear"></i> Status <strong>Offline</strong></p>';
 						}
 
-						$('#content').append('<div class="col-lg-4 col-md-6">' + panel + '<div class="panel-heading">' + data.data[x].description + '</div>' + '<div class="panel-body">' + '<p><i class="fa fa-gears"></i> Asset No. <strong>' + data.data[x].assetno + '</strong></p>' + '<p><i class="fa fa-tachometer"></i> Speed <strong>' + data.data[x].speed + '</strong> SPH</p>' + '<p><i class="fa fa-bar-chart-o"></i> Production <strong>' + data.data[x].tprod + '</strong> sheet(s)</span></p><p><i class="fa fa-exclamation-circle"></i> Error code <strong>< ' + data.data[x].errorcode + ' ></strong></p><p class="text-danger"><i class="fa fa-tag"></i> Error Desc. <strong>' + data.data[x].errordesc + '</strong></p>' + monitor + '</div><a href="/sismon_beta/section/detail/'+ data.data[x].assetno +'"><div class="panel-footer"><span class="pull-left">View Details</span><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span><div class="clearfix"></div></div> </a></div></div>');
+						if (data.data[x].mesinrun == 1) {
+							mesinrun = '<p class="text-success"><i class="fa fa-play"></i> State <strong>Running</strong></p>';
+						} else {
+							mesinrun = '<p class="text-danger"><i class="fa fa-stop"></i> State <strong>Stop or Preparation</strong></p>';
+						}
+
+						if (data.data[x].production == 1) {
+							production = '<p class="text-success"><i class="fa fa-align-justify"></i> Production <strong>ON</strong></p>';
+						} else {
+							production = '<p class="text-danger"><i class="fa fa-align-justify"></i> Production <strong>OFF</strong></p>';
+						}
+
+						$('#content').append('<div class="col-lg-4 col-md-6">' + panel + '<div class="panel-heading">' + data.data[x].description + '</div>' + '<div class="panel-body">' + '<p><i class="fa fa-gears"></i> Asset No. <strong>' + data.data[x].assetno + '</strong></p>' + mesinrun + production + '<p><i class="fa fa-tachometer"></i> Speed <strong>' + data.data[x].speed + '</strong> SPH</p>' + '<p><i class="fa fa-bar-chart-o"></i> Production <strong>' + data.data[x].tprod + '</strong> sheet(s)</span></p><p><i class="fa fa-exclamation-circle"></i> Error code <strong>< ' + data.data[x].errorcode + ' ></strong></p><p class="text-danger"><i class="fa fa-tag"></i> Error Desc. <strong>' + data.data[x].errordesc + '</strong></p>' + monitor + '</div><a href="/sismon_beta/section/detail/' + data.data[x].assetno + '"><div class="panel-footer"><span class="pull-left">View Details</span><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span><div class="clearfix"></div></div> </a></div></div>');
 					}
 				} else {
 					$("#content").html("No Data or Error occured!");
 				}
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
-					$("#content").html("Error: " + errorThrown);
+				$("#content").html("Error: " + errorThrown);
 			},
 			beforeSend : function(xhr) {
 				xhr.setRequestHeader("Authorization", api_key);
